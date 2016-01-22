@@ -1,0 +1,10 @@
+{
+  "applications": {
+    "_default": {
+      "link": "ng-instagram"
+    },
+    "ng-instagram": {
+      "applicationId": "cmkFb3fXMq5OlHsY5rESuEIWlwCUQCijX6fABJmG"
+    }
+  }
+}

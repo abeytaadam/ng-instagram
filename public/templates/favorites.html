@@ -1,0 +1,14 @@
+<h1>Welcome to the Favorites Page!</h1>
+<div class="row">
+	<div class="col-md-3 thumbnail" ng-repeat="favorite in favorites">
+		<p>{{favorite.user}}</p>
+		<img ng-src={{favorite.url}}>
+		<p>
+		<span>
+			<ng-pluralize count="favorite.likes" 
+				when="{'0': 'No likes', 'one': '{} like', 'other': '{} likes'}">
+			</ng-pluralize>
+		</span>
+		</p>
+	</div>
+</div>
