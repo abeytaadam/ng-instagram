@@ -1,9 +1,9 @@
 var app = angular.module('instagramSearchApp', ['ngRoute', 'ngResource']);
 
-var parseRequestHeaders = {
-  'X-Parse-Application-Id': 'cmkFb3fXMq5OlHsY5rESuEIWlwCUQCijX6fABJmG',
-  'X-Parse-REST-API-Key': 'rS3Jt4LkAaokGDWa29cfm2fRiHZLDnm5J5wuqikn'
-};
+// var parseRequestHeaders = {
+//   'X-Parse-Application-Id': 'cmkFb3fXMq5OlHsY5rESuEIWlwCUQCijX6fABJmG',
+//   'X-Parse-REST-API-Key': 'rS3Jt4LkAaokGDWa29cfm2fRiHZLDnm5J5wuqikn'
+// };
 
 app.config(['$routeProvider', '$locationProvider', function ($routeProvider, $locationProvider) {
   $routeProvider
@@ -23,16 +23,16 @@ app.config(['$routeProvider', '$locationProvider', function ($routeProvider, $lo
 }]);
 
 app.factory('Photo', ['$resource', function($resource) {
-  return $resource('https://api.parse.com/1/classes/Photo/:photoId', {photoId: '@photoId'},
+  return $resource('/api/photos/:id', {photoId: '@_id'},
      {
       query: {
-        method: 'GET',
-        isArray: false,
-        headers: parseRequestHeaders
+        method: 'GET'
+        // isArray: false,
+        // headers: parseRequestHeaders
       },
       save: {
-        method: 'POST',
-        headers: parseRequestHeaders
+        method: 'POST'
+        // headers: parseRequestHeaders
       }
      });
 }]);
@@ -59,9 +59,9 @@ app.controller('SearchCtrl', ['$scope', '$http', 'Photo', function($scope, $http
       likes: photo.likes.count
     };
 
-    Photo.save(photoData, function(data) {
+    Photo.save(photoData, function (data) {
       // success callback
-    }, function(error) {
+    }, function (error) {
       // error callback
     });
   };
@@ -70,8 +70,8 @@ app.controller('SearchCtrl', ['$scope', '$http', 'Photo', function($scope, $http
 app.controller('FavoritesCtrl', ['$scope', 'Photo', function($scope, Photo){
   $scope.favorites = [];
   Photo.query(function(data) {
-    $scope.favorites = data.results;
-    console.log($scope.favorites);
+    $scope.favorites = data.photos;
+    console.log(data);
   }, function(error) {
     // error callback
   });
