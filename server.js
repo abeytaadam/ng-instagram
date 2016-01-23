@@ -40,13 +40,12 @@ app.post('/api/photos', function(req, res) {
 	console.log(savePhoto);
 	// save photo
 });
-
+//catch all route
+app.get('*', function(req, res) {
+	res.render('index');
+});
 //listen port 3000
 app.listen(3000, function() {
 	console.log('server started');
 });
 
-//catch all route
-app.get('*', function(req, res) {
-	res.render('index');
-});
